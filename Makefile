@@ -36,9 +36,25 @@ stop-docker:
 	docker rm xml-to-json-api
 
 # cloudrun commands
+login-artifact-registry:
+	gcloud auth configure-docker us-central1-docker.pkg.dev
+
+build-image:
+	docker buildx build --platform linux/amd64 -t us-central1-docker.pkg.dev/<project_id>/xml-to-json-api/api .
+
+
+create-repository:
+	gcloud artifacts repositories create xml-to-json-api \
+		--repository-format=docker \
+		--location=us-central1 \
+		--description="Docker repository for XML to JSON API"
+
+push-image:
+	docker push us-central1-docker.pkg.dev/<project_id>/xml-to-json-api/api
+
 deploy-cloudrun:
 	gcloud run deploy xml-to-json-api \
-		--image us-central1-docker.pkg.dev/<project-id>/xml-to-json-api/api \
+		--image us-central1-docker.pkg.dev/<project_id>/xml-to-json-api/api \
 		--region us-central1 \
 		--set-env-vars API_KEY=<your_api_key_here> \
 		--memory 256Mi \
