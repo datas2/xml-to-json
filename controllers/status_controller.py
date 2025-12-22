@@ -10,7 +10,7 @@ def get_status():
     uptime = int(time.time() - start_time)
     return {
         "msg": "API status 🚀",
-        "name": "timestamp-api",
+        "name": "xml-to-json-api",
         "version": app.version,
         "uptime": uptime,
     }
