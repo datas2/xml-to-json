@@ -1,6 +1,7 @@
 # XML/JSON Utility API Documentation
 
-A simple FastAPI service for status checking, XML to JSON, and JSON to XML conversion. This API is a public utility. It may change or be discontinued without notice.
+A simple FastAPI service for status checking, XML to JSON, and JSON to XML conversion.
+This API is a public utility. It may change or be discontinued without notice.
 
 ---
 

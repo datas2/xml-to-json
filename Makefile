@@ -23,3 +23,26 @@ run-tests:
 # fastapi commands
 run-fastapi:
 	uvicorn main:app --reload
+
+# docker commands
+build-docker:
+	docker build -t xml-to-json-api .
+
+run-docker:
+	docker run -d -p 8000:8000 --name xml-to-json-api xml-to-json-api
+
+stop-docker:
+	docker stop xml-to-json-api
+	docker rm xml-to-json-api
+
+# cloudrun commands
+deploy-cloudrun:
+	gcloud run deploy xml-to-json-api \
+		--image us-central1-docker.pkg.dev/<project-id>/xml-to-json-api/api \
+		--region us-central1 \
+		--set-env-vars API_KEY=<your_api_key_here> \
+		--memory 256Mi \
+		--cpu 1 \
+		--max-instances 1 \
+		--timeout 60 \
+		--allow-unauthenticated
